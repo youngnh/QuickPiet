@@ -6,12 +6,14 @@
 		<script src="./lib/jspec.xhr.js"></script>
 		<script src="../lib/commands.js"></script>
 		<script src="../lib/quickpiet.js"></script>
+		<script src="../lib/validations.js"></script>
 		<script>
 			function runSuites() {
 				JSpec
 				.exec('unit/commands.spec.js')
 				.exec('unit/quickpiet.spec.js')
 				.exec('unit/sanity_check.spec.js')
+			        .exec('unit/validations.spec.js')
 				.run({ fixturePath: 'fixtures' })
 				.report()
 			}
