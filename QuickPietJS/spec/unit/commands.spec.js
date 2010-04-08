@@ -259,13 +259,13 @@ describe 'Commands'
 		it 'should error if the stack is empty'
 		  stack = []
 		  
-		  -{ Commands['add'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['add'](stack) }.should.throw_error EvalError, 'Stack [] not of length 2'
 		end
 		
 		it 'should error if stack has only one value'
 		  stack = [10]
 		  
-		  -{ Commands['add'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['add'](stack) }.should.throw_error EvalError, 'Stack [10] not of length 2'
 		end
 
 	  it 'should return undefined'
@@ -289,13 +289,13 @@ describe 'Commands'
 		it 'should error if the stack is empty'
 		  stack = []
 		  
-		  -{ Commands['subtract'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['subtract'](stack) }.should.throw_error EvalError, 'Stack [] not of length 2'
 		end	
 			
 		it 'should error if stack has only one value'
 		  stack = [10]
 		  
-		  -{ Commands['subtract'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['subtract'](stack) }.should.throw_error EvalError, 'Stack [10] not of length 2'
 		end
 
 	  it 'should return undefined'
@@ -319,13 +319,13 @@ describe 'Commands'
 		it 'should error if the stack is empty'
 		  stack = []
 		  
-		  -{ Commands['multiply'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['multiply'](stack) }.should.throw_error EvalError, 'Stack [] not of length 2'
 		end
 				
 		it 'should error if stack has only one value'
 		  stack = [10]
 		  
-		  -{ Commands['multiply'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['multiply'](stack) }.should.throw_error EvalError, 'Stack [10] not of length 2'
 		end
 
 	  it 'should return undefined'
@@ -358,13 +358,13 @@ describe 'Commands'
 		it 'should error if the stack is empty'
 		  stack = []
 		  
-		  -{ Commands['divide'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['divide'](stack) }.should.throw_error EvalError, 'Stack [] not of length 2'
 		end
 				
 		it 'should error if stack has only one value'
 		  stack = [10]
 		  
-		  -{ Commands['divide'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['divide'](stack) }.should.throw_error EvalError, 'Stack [10] not of length 2'
 		end
 
 	  it 'should return undefined'
@@ -396,13 +396,13 @@ describe 'Commands'
 		it 'should error if the stack is empty'
 		  stack = []
 		  
-		  -{ Commands['mod'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['mod'](stack) }.should.throw_error EvalError, 'Stack [] not of length 2'
 		end
 				
 		it 'should error if stack has only one value'
 		  stack = [10]
 		  
-		  -{ Commands['mod'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['mod'](stack) }.should.throw_error EvalError, 'Stack [10] not of length 2'
 		end
 
 	  it 'should return undefined'
@@ -428,7 +428,7 @@ describe 'Commands'
 	  end
 	  
 		it 'should error if the stack is empty'
-		  -{ Commands['not'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['not'](stack) }.should.throw_error EvalError, 'Stack [] not of length 1'
 		end
 
 	  it 'should return undefined'
@@ -458,13 +458,13 @@ describe 'Commands'
 		it 'should error if the stack is empty'
 		  stack = []
 		  
-		  -{ Commands['greater'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['greater'](stack) }.should.throw_error EvalError, 'Stack [] not of length 2'
 		end
 				
 		it 'should error if stack has only one value'
 		  stack = [10]
 		  
-		  -{ Commands['greater'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['greater'](stack) }.should.throw_error EvalError, 'Stack [10] not of length 2'
 		end
 
 	  it 'should return undefined'

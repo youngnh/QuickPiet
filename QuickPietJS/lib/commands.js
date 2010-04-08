@@ -100,51 +100,51 @@ Commands = {
 	},
 	
 	add : function(stack) {
-		Commands._enforce_min_stack_size(stack, 2)
+	    Validations.minStackSize(stack, 2);
 		
-		stack.push(stack.pop() + stack.pop())
+	    stack.push(stack.pop() + stack.pop())
 	},
 	
 	subtract : function(stack) {
-		Commands._enforce_min_stack_size(stack, 2)
-		
-		var top = stack.pop()
-		var second_top = stack.pop()
-		stack.push(second_top - top)
+	    Validations.minStackSize(stack, 2);
+
+	    var top = stack.pop()
+	    var second_top = stack.pop()
+	    stack.push(second_top - top)
 	},
 	
 	multiply : function(stack) {
-		Commands._enforce_min_stack_size(stack, 2)
-		
-		stack.push(stack.pop() * stack.pop())
+	    Validations.minStackSize(stack, 2);
+
+	    stack.push(stack.pop() * stack.pop())
 	},
 	
 	divide : function(stack) {
-		Commands._enforce_min_stack_size(stack, 2)
-		
-		var top = stack.pop()
-		var second_top = stack.pop()
-		stack.push(parseInt(second_top / top))
+	    Validations.minStackSize(stack, 2);
+
+	    var top = stack.pop()
+	    var second_top = stack.pop()
+	    stack.push(parseInt(second_top / top))
 	},
 	
 	mod : function(stack) {
-		Commands._enforce_min_stack_size(stack, 2)
-		
-		var top = stack.pop()
-		var second_top = stack.pop()
-		stack.push(parseInt(second_top % top))
+	    Validations.minStackSize(stack, 2);
+
+	    var top = stack.pop()
+	    var second_top = stack.pop()
+	    stack.push(parseInt(second_top % top))
 	},
 	
 	not : function(stack) {
-		Commands._enforce_non_empty_stack(stack)
-		
-		stack.push(stack.pop() == 0 ? 1 : 0)
+	    Validations.minStackSize(stack, 1);
+
+	    stack.push(stack.pop() == 0 ? 1 : 0)
 	},
 	
 	greater : function(stack) {
-		Commands._enforce_min_stack_size(stack, 2)
-		
-		stack.push(stack.pop() < stack.pop() ? 1 : 0)
+	    Validations.minStackSize(stack, 2)
+
+	    stack.push(stack.pop() < stack.pop() ? 1 : 0)
 	},
 	
 	end : function() {
