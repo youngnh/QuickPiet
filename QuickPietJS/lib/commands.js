@@ -2,13 +2,14 @@ Commands = {
 	':' : function() { },
 	
 	push : function(stack, args) {
-		if(!args || args.length == 0 || args.match(/[^0-9\s]/)) {
-			throw new SyntaxError("Invalid argument(s)")	
-		}
-		
-		jQuery.each(args.split(' '), function(index, value) {
-			stack.push(parseInt(value))
-		})
+	    Validations.given(args);
+	    Validations.invalidCharsCheck(args, /[.,]/);
+	    var values = Validations.numberSequence(args);
+	    Validations.positive(values);
+
+	    jQuery.each(values, function(index, value) {
+		stack.push(value);
+	    });
 	},
 	
 	pop : function(stack, args) {

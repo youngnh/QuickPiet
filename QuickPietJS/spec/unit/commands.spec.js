@@ -40,27 +40,27 @@ describe 'Commands'
 		end
 		
 		it 'should error if missing arguments'
-			-{ Commands['push'](stack) }.should.throw_error SyntaxError, 'Invalid argument(s)'
+			-{ Commands['push'](stack) }.should.throw_error SyntaxError, 'No arguments given!'
 		end
 		
 		it 'should error on negative integers'
-			-{ Commands['push'](stack, '-1') }.should.throw_error SyntaxError, 'Invalid argument(s)'
+			-{ Commands['push'](stack, '-1') }.should.throw_error SyntaxError, 'Cannot give negative numbers'
 		end
 
 		it 'should error if commas are included'
-			-{ Commands['push'](stack, '5,10') }.should.throw_error SyntaxError, 'Invalid argument(s)'
+			-{ Commands['push'](stack, '5,10') }.should.throw_error SyntaxError, "Invalid character ',' in '5,10'"
 		end
 		
 		it 'should error if decimals are included'
-			-{ Commands['push'](stack, '2.5') }.should.throw_error SyntaxError, 'Invalid argument(s)'
+			-{ Commands['push'](stack, '2.5') }.should.throw_error SyntaxError, "Invalid character '.' in '2.5'"
 		end
 		
 		it 'should error if no arguments are included'
-			-{ Commands['push'](stack, '') }.should.throw_error SyntaxError, 'Invalid argument(s)'
+			-{ Commands['push'](stack, '') }.should.throw_error SyntaxError, 'No arguments given!'
 		end
 		
 		it 'should error if values are non-numeric'
-			-{ Commands['push'](stack, 'dog') }.should.throw_error SyntaxError, 'Invalid argument(s)'
+			-{ Commands['push'](stack, 'dog') }.should.throw_error SyntaxError, "'dog' is not composed of parseable integers"
 		end
 	end
 	
