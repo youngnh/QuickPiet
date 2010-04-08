@@ -22,7 +22,7 @@ Commands = {
 
 	    if(!pops_count) {
 		Validations.invalidCharsCheck(args, /[.,]/);
-		pops_count = Validations.numberSequence(args, 1);
+		[pops_count] = Validations.numberSequence(args, 1);
 		Validations.positive(pops_count);
 	    }
 

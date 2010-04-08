@@ -48,6 +48,10 @@ describe 'Validations'
         it 'should throw an error if any arguments are negative'
 	    -{ Validations.positive([-1])}.should.throw_error SyntaxError, "Cannot give negative numbers"
 	end
+
+	it 'should check if a single number is negative'
+	    -{ Validations.positive(-1)}.should.throw_error SyntaxError, "Cannot give negative numbers"
+	end
     end
 
     describe 'invalidCharsCheck'

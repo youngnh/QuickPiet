@@ -30,6 +30,9 @@ Validations = {
     },
 
     positive: function(values) {
+	if(!values.length) {
+	    values = [values];
+	}
 	jQuery.each(values, function(index, value) {
 	    if(value < 0) {
 		throw new SyntaxError("Cannot give negative numbers");
