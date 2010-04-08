@@ -87,14 +87,15 @@ describe 'Commands'
 		end
 		
 		it 'should error if argument is not a single positive numeric value'
-			-{ Commands['pop'](stack, 'a') }.should.throw_error SyntaxError, 'Invalid argument(s)'
-			-{ Commands['pop'](stack, '5.6') }.should.throw_error SyntaxError, 'Invalid argument(s)'
-			-{ Commands['pop'](stack, '-1') }.should.throw_error SyntaxError, 'Invalid argument(s)'
+			-{ Commands['pop'](stack, 'a') }.should.throw_error SyntaxError, "'a' is not composed of parseable integers"
+			-{ Commands['pop'](stack, '5.6') }.should.throw_error SyntaxError, "Invalid character '.' in '5.6'"
+			-{ Commands['pop'](stack, '-1') }.should.throw_error SyntaxError, 'Cannot give negative numbers'
+			-{ Commands['pop'](stack, '2 3')}.should.throw_error SyntaxError, "Expected 1 integer, but found 2"
 		end
-		
+
 		it 'should error if pop is called on an empty stack'
 			stack.pop()
-			-{ Commands['pop'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+			-{ Commands['pop'](stack) }.should.throw_error EvalError, 'Stack [] not of length 1'
 		end
 		
 		it 'should error if multiple pops are more than stack height'
@@ -102,7 +103,7 @@ describe 'Commands'
 		  stack.push(200)
 		  stack.push(200)
 		  
-		  -{ Commands['pop'](stack, '5') }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['pop'](stack, '5') }.should.throw_error EvalError, 'Stack [10,200,200,200] not of length 5'
 		end
 		
 		it 'should return undefined'

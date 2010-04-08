@@ -13,24 +13,23 @@ Commands = {
 	},
 	
 	pop : function(stack, args) {
-		var pops_count = 1
-		
-		if(args && args.length > 0) {
-			args = jQuery.trim(args)
-			
-			if(args.length == 0 || args.match(/[^0-9\s]/) || parseInt(args) == NaN) {
-				throw new SyntaxError('Invalid argument(s)')	
-			}
-			else {
-				pops_count = parseInt(args)	
-			}
-		}
-		
-		Commands._enforce_min_stack_size(stack, pops_count)
+	    var pops_count;
+	    try {
+		Validations.given(args);
+	    } catch(e) {
+		pops_count = 1;
+	    }
 
-		for(var i = 0; i < pops_count; i++) {
-			stack.pop()
-		}
+	    if(!pops_count) {
+		Validations.invalidCharsCheck(args, /[.,]/);
+		pops_count = Validations.numberSequence(args, 1);
+		Validations.positive(pops_count);
+	    }
+
+	    Validations.minStackSize(stack, pops_count);
+	    for(var i = 0; i < pops_count; i++) {
+		stack.pop();
+	    }
 	},
 	
 	duplicate : function(stack) {
