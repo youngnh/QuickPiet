@@ -229,11 +229,11 @@ describe 'Commands'
 		it 'should error if the value is < 1'
 			stack.push(-1)  
 		
-			-{ Commands['out'](stack, '', STDIN, STDOUT) }.should.throw_error EvalError, 'Can not output negative values'
+			-{ Commands['out'](stack, '', STDIN, STDOUT) }.should.throw_error EvalError, 'Can not output negative values (-1)'
 		end
 		
 		it 'should error if the stack is empty'
-		  -{ Commands['out'](stack, '', STDIN, STDOUT) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['out'](stack, '', STDIN, STDOUT) }.should.throw_error EvalError, 'Stack [] not of length 1'
 		end
 		
 		it 'should return undefined'

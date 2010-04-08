@@ -84,19 +84,19 @@ Commands = {
 	
 	// Done as a string b/c of issue in Chrome
 	'out' : function(stack, args, STDIN, STDOUT) {
-		Commands._enforce_non_empty_stack(stack)
+	    Validations.minStackSize(stack, 1);
 		
-		var numeric_value = stack.pop()
-		
-		if(numeric_value < 1) {
-			throw new EvalError('Can not output negative values (' + numeric_value + ')')
-		}
-		
-		var character = String.fromCharCode(numeric_value)
-		
-		console && console.log('OUT:(' + numeric_value + '|' + character + ')')
-		
-		STDOUT.push(character)
+	    var numeric_value = stack.pop()
+
+	    if(numeric_value < 1) {
+		throw new EvalError('Can not output negative values (' + numeric_value + ')')
+	    }
+
+	    var character = String.fromCharCode(numeric_value)
+
+	    console && console.log('OUT:(' + numeric_value + '|' + character + ')')
+
+	    STDOUT.push(character)
 	},
 	
 	add : function(stack) {
