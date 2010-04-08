@@ -23,7 +23,8 @@ Validations = {
 	    results.push(parseInt(value));
 	});
 	if(length && results.length != length) {
-	    throw new SyntaxError("Expected " + length + " integers, but found " + results.length);
+	    var clause = length == 1 ? (length + " integer,") : (length + " integers,");
+	    throw new SyntaxError("Expected " + clause + " but found " + results.length);
 	}
 	return results;
     },

@@ -38,6 +38,10 @@ describe 'Validations'
 	    -{ Validations.numberSequence('9 3 2', 2)}.should.throw_error SyntaxError, "Expected 2 integers, but found 3"
 	    Validations.numberSequence('9 3', 2).should.eql [9, 3]
 	end
+
+	it 'should use proper grammar in exception message'
+	    -{ Validations.numberSequence('9 1', 1)}.should.throw_error SyntaxError, "Expected 1 integer, but found 2"
+	end
     end
 
     describe 'positive'
