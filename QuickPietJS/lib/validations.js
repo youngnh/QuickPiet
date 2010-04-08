@@ -25,6 +25,14 @@ Validations = {
 	if(length && results.length != length) {
 	    throw new SyntaxError("Expected " + length + " integers, but found " + results.length);
 	}
-	return results.length == 1 ? results[0] : results;
+	return results;
+    },
+
+    positive: function(values) {
+	jQuery.each(values, function(index, value) {
+	    if(value < 0) {
+		throw new SyntaxError("Cannot give negative numbers");
+	    }
+	});
     }
 };

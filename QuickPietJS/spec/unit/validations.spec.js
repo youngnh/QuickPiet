@@ -25,8 +25,8 @@ describe 'Validations'
 	    -{ Validations.numberSequence('abc') }.should.throw_error SyntaxError, "'abc' is not composed of parseable integers"
 	end
 
-	it 'should return the parse of the given string'
-	    Validations.numberSequence('9').should.eql 9
+	it 'should return a list containing the parsed value'
+	    Validations.numberSequence('9').should.eql [9]
 	end
 
 	it 'return an array of values if more than one'
@@ -37,6 +37,12 @@ describe 'Validations'
 	    -{ Validations.numberSequence('9', 2)}.should.throw_error SyntaxError, "Expected 2 integers, but found 1"
 	    -{ Validations.numberSequence('9 3 2', 2)}.should.throw_error SyntaxError, "Expected 2 integers, but found 3"
 	    Validations.numberSequence('9 3', 2).should.eql [9, 3]
+	end
+    end
+
+    describe 'positive'
+        it 'should throw an error if any arguments are negative'
+	    -{ Validations.positive([-1])}.should.throw_error SyntaxError, "Cannot give negative numbers"
 	end
     end
 end
