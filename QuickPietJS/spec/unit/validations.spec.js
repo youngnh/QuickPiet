@@ -60,4 +60,15 @@ describe 'Validations'
 	    Validations.invalidCharsCheck('5 2', /[,]/).should.eql true
 	end
     end
+
+    describe 'minStackSize'
+        it "should throw an error is stack isn't given size"
+            -{ Validations.minStackSize([], 1)}.should.throw_error EvalError, "Stack [] not of length 1"
+	    -{ Validations.minStackSize([2, 3, 4], 10)}.should.throw_error EvalError, "Stack [2,3,4] not of length 10"
+	end
+
+	it "should return true if stack is proper size"
+	    Validations.minStackSize([1], 1).should.eql true
+	end
+    end
 end

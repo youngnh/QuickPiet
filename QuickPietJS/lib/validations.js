@@ -43,5 +43,14 @@ Validations = {
 	    return true;
 	}
 	throw new SyntaxError("Invalid character '" + args[i] + "' in '" + args + "'");
+    },
+
+    minStackSize: function(stack, size) {
+	try {
+	    this.minLength(stack, size);
+	} catch(e) {
+	    throw new EvalError("Stack [" + stack + "] not of length " + size);
+	}
+	return true;
     }
 };
