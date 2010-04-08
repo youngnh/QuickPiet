@@ -152,29 +152,28 @@ Commands = {
 	},
 	
 	goto : function(stack, args) {
-		args = jQuery.trim(args)
-		
-		if(!args || args.length < 2 || args.match(/[^a-zA-Z0-9\s]/)) {
-			throw new SyntaxError('Invalid argument(s)')
-		}
-		
-		var arguments = args.split(' ')
-		
-		if(arguments.length != 2) {
-			throw new SyntaxError('Invalid argument(s)')
-		}
-		
-		Commands._enforce_non_empty_stack(stack)
-		
-		var switch_value = stack.pop() % 4
-		switch_value = switch_value < 0 ? switch_value * (-1) : switch_value
-		
-		if(switch_value == 1) {
-			return arguments[0]
-		}
-		else if(switch_value == 3) {
-			return arguments[1]
-		}
+	    args = jQuery.trim(args)
+
+	    if(!args || args.length < 2 || args.match(/[^a-zA-Z0-9\s]/)) {
+		throw new SyntaxError('Invalid argument(s)')
+	    }
+
+	    var arguments = args.split(' ')
+
+	    if(arguments.length != 2) {
+		throw new SyntaxError('Invalid argument(s)')
+	    }
+
+	    Validations.minStackSize(stack, 1);
+
+	    var switch_value = stack.pop() % 4
+	    switch_value = switch_value < 0 ? switch_value * (-1) : switch_value
+
+	    if(switch_value == 1) {
+		return arguments[0]
+	    } else if(switch_value == 3) {
+		return arguments[1]
+	    }
 	},
 	
 	assert : function(stack, args) {
@@ -192,16 +191,6 @@ Commands = {
 			if(stack_value != check_value) {
 				throw new EvalError('Invalid stack: wrong values')
 			}
-		}
-	},
-
-	_enforce_non_empty_stack : function(stack) {
-		Commands._enforce_min_stack_size(stack, 1)
-	},
-	
-	_enforce_min_stack_size : function(stack, min_size) {
-		if(stack.length < min_size) {
-			throw new EvalError('Stack does not have enough values')
 		}
 	}
 }

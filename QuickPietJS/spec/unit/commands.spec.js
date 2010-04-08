@@ -490,7 +490,7 @@ describe 'Commands'
 	  end
 	  
 	  it 'should error if the stack is empty'
-	    -{ Commands['goto'](stack, 'b c') }.should.throw_error EvalError, 'Stack does not have enough values'
+	    -{ Commands['goto'](stack, 'b c') }.should.throw_error EvalError, 'Stack [] not of length 1'
 	  end
 
 		it 'should error if more than two arguments are given'
