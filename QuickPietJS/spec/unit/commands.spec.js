@@ -124,7 +124,7 @@ describe 'Commands'
 		end
 		
 		it 'should error if stack is empty'
-		  -{ Commands['duplicate'](stack) }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['duplicate'](stack) }.should.throw_error EvalError, 'Stack [] not of length 1'
 		end
 				
 		it 'should return undefined'
@@ -146,24 +146,24 @@ describe 'Commands'
 		end
 		
 		it 'should error if the stack is shorter than the requested depth'
-		  -{ Commands['roll'](stack, '10 1') }.should.throw_error EvalError, 'Stack does not have enough values'
+		  -{ Commands['roll'](stack, '10 1') }.should.throw_error EvalError, 'Stack [1,2,3,4,5] not of length 10'
 		end
 
 		it 'should handle negative turns by rolling in the opposite direction'
-		  Commands['roll'](stack, '3 -1')
+		  Commands['roll'](stack, '3 -2')
 		  
-		  stack.should.eql [1, 2, 4, 5, 3]
+		  stack.should.eql [1, 2, 5, 3, 4]
 		end
 		
 		it 'should error if the depth is negative'
-		  -{ Commands['roll'](stack, '-1 1') }.should.throw_error SyntaxError, 'Invalid argument(s)'
+		  -{ Commands['roll'](stack, '-1 1') }.should.throw_error SyntaxError, 'Cannot give negative numbers'
 		end
 		
 		it 'should error if invalid arguments are given (e.g. missing, commas, too many, letters, and decimals)'
-		  -{ Commands['roll'](stack, '1, 1') }.should.throw_error SyntaxError, 'Invalid argument(s)'
-		  -{ Commands['roll'](stack, '1 1 3') }.should.throw_error SyntaxError, 'Invalid argument(s)'
-		  -{ Commands['roll'](stack, '1 a') }.should.throw_error SyntaxError, 'Invalid argument(s)'
-		  -{ Commands['roll'](stack, '1 2.5') }.should.throw_error SyntaxError, 'Invalid argument(s)'
+		  -{ Commands['roll'](stack, '1, 1') }.should.throw_error SyntaxError, "Invalid character ',' in '1, 1'"
+		  -{ Commands['roll'](stack, '1 1 3') }.should.throw_error SyntaxError, "Expected 2 integers, but found 3"
+		  -{ Commands['roll'](stack, '1 a') }.should.throw_error SyntaxError, "'1 a' is not composed of parseable integers"
+		  -{ Commands['roll'](stack, '1 2.5') }.should.throw_error SyntaxError, "Invalid character '.' in '1 2.5'"
 		end
 		
 		it 'should use top two values if no arguments are given'
@@ -175,6 +175,13 @@ describe 'Commands'
 		  stack.should.eql [1, 4, 5, 2, 3]
 		end
 		
+		it 'should check that top value is not negative when no arguments given'
+		    stack.push(-1)
+		    stack.push(4)
+
+		    -{ Commands['roll'](stack, '')}.should.throw_error SyntaxError, 'Cannot give negative numbers'
+		end
+
 		it 'should return undefined'
 		  Commands['roll'](stack, '2 1').should.be_undefined
 		end

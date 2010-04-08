@@ -33,56 +33,43 @@ Commands = {
 	},
 	
 	duplicate : function(stack) {
-		Commands._enforce_non_empty_stack(stack)
+	    Validations.minStackSize(stack, 1);
 		
-		var val = stack.pop()
-		stack.push(val)
-		stack.push(val)
+	    var val = stack.pop();
+	    stack.push(val);
+	    stack.push(val);
 	},
 	
 	roll : function(stack, args) {
-		args = jQuery.trim(args)
-		
-		if(!args || args.length == 0) {
-			Commands._enforce_min_stack_size(stack, 2)
-			var t1 = stack.pop()
-			var t2 = stack.pop()
-			args = ('' + t2 + ' ' + t1)
+	    var depth, turns;
+	    try {
+		Validations.given(args);
+	    } catch(e) {
+		turns = stack.pop();
+		depth = stack.pop();
+	    }
+
+	    if(!depth || !turns) {
+		Validations.invalidCharsCheck(args, /[.,]/);
+		[depth, turns] = Validations.numberSequence(args, 2);
+	    }
+	    Validations.positive(depth);
+	    Validations.minStackSize(stack, depth);
+
+
+	    var depth_index = stack.length - depth
+
+	    if(turns >= 0) {
+		for(var turn = 0; turn < turns; turn++) {
+		    stack.splice(depth_index, 0, stack.pop())
 		}
+	    } else {
+		turns = turns * -1
 		
-		if(!args || args.match(/[^0-9\-\s]/)) {
-			throw new SyntaxError('Invalid argument(s)')
+		for(var turn = 0; turn < turns; turn++) {
+		    stack.push(stack.splice(depth_index, 1)[0])
 		}
-		
-		var args_array = args.split(' ')
-		
-		if(args_array.length != 2) {
-			throw new SyntaxError('Invalid argument(s)')
-		}
-		
-		var depth = parseInt(args_array[0])
-		var turns = parseInt(args_array[1])
-		
-		if(depth < 1) {
-			throw new SyntaxError('Invalid argument(s)')
-		}
-		
-		Commands._enforce_min_stack_size(stack, depth)
-		
-		var depth_index = stack.length - depth
-		
-		if(turns >= 0) {
-			for(var turn = 0; turn < turns; turn++) {
-				stack.splice(depth_index, 0, stack.pop())
-			}
-		}
-		else {
-			turns = turns * -1
-			
-			for(var turn = 0; turn < turns; turn++) {
-				stack.push(stack.splice(depth_index, 1)[0])
-			}
-		}
+	    }
 	},
 	
 	// Done as a string b/c of issue in Chrome
