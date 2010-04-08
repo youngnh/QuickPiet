@@ -34,5 +34,13 @@ Validations = {
 		throw new SyntaxError("Cannot give negative numbers");
 	    }
 	});
+    },
+
+    invalidCharsCheck: function(args, re) {
+	var i = args.search(re);
+	if(i == -1) {
+	    return true;
+	}
+	throw new SyntaxError("Invalid character '" + args[i] + "' in '" + args + "'");
     }
 };

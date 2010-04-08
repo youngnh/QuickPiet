@@ -45,4 +45,15 @@ describe 'Validations'
 	    -{ Validations.positive([-1])}.should.throw_error SyntaxError, "Cannot give negative numbers"
 	end
     end
+
+    describe 'invalidCharsCheck'
+        it 'should throw an error if argument contains invalid character'
+	    -{ Validations.invalidCharsCheck('5,2', /[,]/)}.should.throw_error SyntaxError, "Invalid character ',' in '5,2'"
+	    -{ Validations.invalidCharsCheck('5.2', /[.,]/)}.should.throw_error SyntaxError, "Invalid character '.' in '5.2'"
+	end
+
+	it 'should return true if no invalid character found'
+	    Validations.invalidCharsCheck('5 2', /[,]/).should.eql true
+	end
+    end
 end
